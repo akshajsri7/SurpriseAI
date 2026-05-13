@@ -7,9 +7,9 @@ Can a neural network beat Wall Street's consensus? We train a transformer on ana
 
 ## Overview
 
-When a company reports earnings, prices move based on the *gap* between actual results and analyst expectations — not the raw numbers. The standard benchmark, the analyst consensus, is a simple average that throws away information about who made each forecast and when.
+When a company reports earnings, prices move based on the *gap* between actual results and analyst expectations - not the raw numbers. The standard benchmark, the analyst consensus, is a simple average that throws away information about who made each forecast and when.
 
-**BeatTheStreet** processes the full history of analyst forecast revisions before each earnings event using a transformer model with learned analyst embeddings. We test whether this approach predicts earnings surprises better than the consensus average.
+**SurpriseAI** processes the full history of analyst forecast revisions before each earnings event using a transformer model with learned analyst embeddings. We test whether this approach predicts earnings surprises better than the consensus average.
 
 ---
 
@@ -81,15 +81,15 @@ Five years of quarterly earnings events for S&P 100 companies, pulled from the B
 | Zero baseline | — | — |
 | Latest consensus | — | — |
 | Linear regression | — | — |
-| **BeatTheStreet (ours)** | — | — |
+| **SurpriseAI (ours)** | — | — |
 
 ---
 
 ## Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/BeatTheStreet.git
-cd BeatTheStreet
+git clone https://github.com/YOUR_USERNAME/SurpriseAI.git
+cd SurpriseAI
 pip install -r requirements.txt
 ```
 
