@@ -26,7 +26,7 @@ When a company reports earnings, prices move based on the *gap* between actual r
 ## Project Structure
 
 ```
-BeatTheStreet/
+SurpriseAI/
 ├── data/
 │   └── README.md           # Bloomberg field descriptions (data not included)
 ├── notebooks/
