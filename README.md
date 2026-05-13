@@ -15,11 +15,11 @@ When a company reports earnings, prices move based on the *gap* between actual r
 
 ## Team
 
-| Name | Role | Email |
-|------|------|-------|
-| Rayyan Hussain | Data Lead | rhussai9@depaul.edu |
-| Akshaj Sriachutananda | Modeling Lead | asriachu@depaul.edu |
-| Damian Moreno | Experiments & Writing Lead | dmoren37@depaul.edu |
+| Name | Email |
+|------|-------|
+| Rayyan Hussain | rhussai9@depaul.edu |
+| Akshaj Sriachutananda | asriachu@depaul.edu |
+| Damian Moreno | dmoren37@depaul.edu |
 
 ---
 
