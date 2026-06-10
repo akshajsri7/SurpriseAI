@@ -1,5 +1,10 @@
 # SurpriseAI
 
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)
+![License: MIT](https://img.shields.io/badge/Code-MIT-green)
+![Data](https://img.shields.io/badge/Data-Bloomberg%20(not%20redistributable)-lightgrey)
+
 **Can a transformer that learns *who* each analyst is predict earnings surprises better than the Wall Street consensus?**
 
 A rigorous, controlled study of one concrete hypothesis: that a transformer giving each analyst a learned identity can read signal out of the individual estimates that the consensus average discards. We test it head-to-head against three baselines and an LSTM, with a direct embedding ablation, an attention analysis, and full significance testing — a clean, apples-to-apples evaluation on a strictly time-ordered test set.
@@ -78,6 +83,12 @@ Test set = **267 announcements**, strictly time-ordered (train on the earliest e
 - **Directional accuracy 0.876 is a mirage.** 87.6% of surprises are positive, so a model that always says "beat" scores 0.876. **Balanced accuracy = 0.50** (a coin flip) exposes this. We report both side by side on purpose.
 - **Identity adds nothing.** With vs. without analyst embeddings, test errors are essentially identical (MSE ≈ 154 both ways); a paired Wilcoxon test on per-event squared errors finds no significant difference.
 
+### Diagnostics
+
+![Predicted-vs-actual, error distribution, and surprise distribution](assets/diagnostics.png)
+
+The picture tells the story at a glance. **Left:** predicted surprises collapse into a flat horizontal band around the positive mean (~5–6%) no matter what the actual surprise is — the model is predicting the average, not tracking the tails. **Center:** the error distribution is tight and centered near zero, but only because most surprises are small and positive. **Right:** the actual-surprise distribution is heavily right-skewed (87.6% positive, dashed lines mark the tails the model never reaches).
+
 ---
 
 ## Why the results look the way they do
@@ -136,6 +147,8 @@ SurpriseAI/
 │   └── surpriseAI.ipynb           # end-to-end: data prep, baselines, model, ablation, plots
 ├── paper/
 │   └── SurpriseAI_FinalPaper.pdf  # final write-up
+├── assets/
+│   └── diagnostics.png            # results figure used in this README
 └── data/
     └── README.md                  # Bloomberg CSV schemas (data not included)
 ```
@@ -163,3 +176,11 @@ The notebook is the full pipeline — data cleaning and feature engineering, the
 4. Sepp Hochreiter and Jürgen Schmidhuber. *Long short-term memory.* Neural Computation, 9(8):1735–1780, 1997.
 5. Scott E. Stickel. *Reputation and performance among security analysts.* The Journal of Finance, 47(5):1811–1836, 1992.
 6. Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. *Attention is all you need.* In Advances in Neural Information Processing Systems, volume 30, 2017.
+
+---
+
+## License & data use
+
+The **code** in this repository (the notebook and supporting files) is released under the [MIT License](LICENSE).
+
+The **data is not covered by that license and is not included.** The underlying earnings and analyst-estimate data was sourced from the **Bloomberg Terminal** and is subject to Bloomberg's terms of use, which do not permit redistribution. We therefore commit only the schema documentation in [`data/README.md`](data/README.md), not the data itself, and `data/*.csv` is git-ignored to prevent accidental commits. To reproduce the results, supply your own Bloomberg exports in the documented format.
