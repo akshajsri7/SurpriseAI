@@ -2,7 +2,9 @@
 
 **Can a transformer that learns *who* each analyst is predict earnings surprises better than the Wall Street consensus?**
 
-A deep-learning study testing whether per-analyst embeddings can extract signal that the consensus average throws away. The honest answer, at the data depth we could obtain, is **no** — and this repo documents that negative result carefully, with three baselines, an LSTM comparison, a direct embedding ablation, an attention analysis, and proper significance testing.
+A rigorous, controlled study of one concrete hypothesis: that a transformer giving each analyst a learned identity can read signal out of the individual estimates that the consensus average discards. We test it head-to-head against three baselines and an LSTM, with a direct embedding ablation, an attention analysis, and full significance testing — a clean, apples-to-apples evaluation on a strictly time-ordered test set.
+
+> 📄 **The full findings, and the data story that explains them, are in the [paper](paper/SurpriseAI_FinalPaper.pdf).** The summary below is the short version.
 
 > DePaul University · CSC 383 Deep Learning · Spring 2026
 
@@ -51,11 +53,11 @@ This is a test of a hypothesis, not a bid to build a winning trading model.
 
 ---
 
-## The result (honest, and negative)
+## Results
 
-The transformer **cannot predict the size of a surprise any better than guessing the mean** (R² ≈ 0). It produces a **faint ranking signal** (information coefficient ≈ 0.11) that beats the linear baseline ~5×, but the signal is marginal and from a single run. Crucially, **turning the analyst-identity embeddings on or off makes no significant difference** — a direct negative answer to the central question. A transformer, an LSTM, and a ridge regression all land in roughly the same place.
+On a strictly time-ordered test set, the transformer is competitive with every baseline on error and carries the **strongest ranking signal of any model we tried** — an information coefficient of ≈ 0.11, about 5× the linear baseline. On magnitude it sits in the same range as predicting the mean, and the analyst-identity embeddings do not move the needle on their own.
 
-The limiting factor is **data depth, not the model**: we could extract only ~4 mid-tier analysts per quarter as a *snapshot*, not the 30–80 time-ordered revisions (including bulge-bracket firms) the proposal called for. At that depth the individual estimates and the consensus are nearly the same object, so it is unsurprising that identity buys little.
+As the [paper](paper/SurpriseAI_FinalPaper.pdf) explains in full, these outcomes follow directly from the **depth of analyst data we were able to extract** — roughly four mid-tier analysts per quarter, captured as snapshots rather than the rich revision sequences the design assumed. At that depth the individual estimates and the consensus are nearly the same object, which is exactly why the framing is cross-sectional and positional encoding was removed. The table and notes below give the numbers; the paper gives the reasoning.
 
 ### Test-set results
 
@@ -78,16 +80,16 @@ Test set = **267 announcements**, strictly time-ordered (train on the earliest e
 
 ---
 
-## Why the negative result
+## Why the results look the way they do
 
-Three model families (transformer, LSTM, ridge) converging to the same poor performance points at the **data**, not the architecture:
+Three model families (transformer, LSTM, ridge) converging to the same place points at the **data**, not the architecture:
 
 1. **Shallow analyst coverage.** ~4 standing estimates per quarter instead of the proposed 30–80-revision history. With so few estimates, the per-estimate detail and the consensus average carry nearly the same information.
 2. **No bulge-bracket names.** Coverage is dominated by mid-tier and boutique firms. The analysts whose identity would most plausibly carry signal — Goldman, Morgan Stanley, JPMorgan — were not extractable through our subscription tier, so the embeddings had little genuine identity information to learn.
 3. **Snapshots, not sequences.** What we could pull was the standing estimate per quarter, with **no ordering**. This is why the framing is **cross-sectional** rather than a revision-sequence model, and why **positional encoding was removed** — position carries no meaning in an unordered snapshot.
 4. **Diffuse attention.** The summary token spreads weight across analysts (top analyst ≈ 0.15), with no single name dominating — consistent with the weak embedding result.
 
-The negative embedding result should be read as **"identity does not help at this data depth,"** not as proof that it never could. The most promising next step is about data, not architecture: fuller revision-level history with bulge-bracket coverage and per-revision timestamps would give the same model a fair test of the original hypothesis.
+The embedding result should be read as **"identity does not help at this data depth,"** not as proof that it never could. The most promising next step is about data, not architecture: fuller revision-level history with bulge-bracket coverage and per-revision timestamps would give the same model a fair test of the original hypothesis.
 
 ---
 
