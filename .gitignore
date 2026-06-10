@@ -1,3 +1,6 @@
+# Licensed Bloomberg data — never commit (not redistributable). See data/README.md
+data/*.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
