@@ -5,7 +5,37 @@
 A deep-learning study testing whether per-analyst embeddings can extract signal that the consensus average throws away. The honest answer, at the data depth we could obtain, is **no** — and this repo documents that negative result carefully, with three baselines, an LSTM comparison, a direct embedding ablation, an attention analysis, and proper significance testing.
 
 > DePaul University · CSC 383 Deep Learning · Spring 2026
-> Rayyan Hussain · Akshaj Sriachutananda · Damian Moreno
+
+## Team
+
+| Name | Email |
+|---|---|
+| Rayyan Hussain | rhussai9@depaul.edu |
+| Akshaj Sriachutananda | asriachu@depaul.edu |
+| Damian Moreno | dmoren37@depaul.edu |
+
+The three of us shared the work across data extraction, modeling, and experiments/writing, with weekly check-ins.
+
+---
+
+## Concepts in plain terms
+
+This project sits at the intersection of finance and machine learning, so here is the vocabulary you need — no background in either assumed.
+
+**The finance side**
+
+- **EPS (earnings per share)** — a company's quarterly profit divided by its number of shares: the profit attributable to one share.
+- **Analyst consensus** — before a company reports, professional analysts at banks and research firms each publish their own guess for that EPS. The *consensus* is just the average of those guesses — the market's standard expectation.
+- **Earnings surprise** — the gap between what the company *actually* reports and what the consensus expected, written as a percentage. A positive surprise means the company beat expectations; negative means it missed. **This is what we try to predict**, because a stock moves on the surprise, not on the raw number.
+- **Bulge-bracket vs. mid-tier analysts** — "bulge-bracket" are the largest, most prestigious banks (Goldman Sachs, Morgan Stanley, JPMorgan); their analysts' reputations are strongest. "Mid-tier" and boutique firms are smaller. *Which* analysts cover a stock turns out to matter for our story.
+
+**The machine-learning side**
+
+- **Transformer** — the neural-network family behind tools like ChatGPT. Its key trick is **attention**: it can look at a whole group of inputs at once and decide, for each one, how much weight to give every other input. Here the inputs are the analyst guesses for one quarter, and attention lets the model decide which analysts to lean on.
+- **Embedding** — a learned list of numbers the model attaches to each analyst (the way a language model attaches a vector to each word). The idea is that the embedding captures an analyst's track record and tendencies, so the model can learn that some analysts are sharper or more biased than others. **Whether these embeddings actually help is the core question of the project.**
+- **Baseline** — a deliberately simple reference model. If a fancy model can't beat the simple ones, the fancy model isn't earning its keep.
+
+**The core idea in one sentence:** the consensus average throws away *who* made each estimate and *how* their guesses are spread out — we test whether a transformer that keeps that detail, and learns each analyst's identity, can predict surprises better than the average and better than simpler models.
 
 ---
 
