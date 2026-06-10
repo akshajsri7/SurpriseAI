@@ -1,6 +1,8 @@
-torch
-numpy
-pandas
-scikit-learn
-scipy
-matplotlib
+# Python 3.11. Floors reflect the versions the project was developed and run against;
+# newer compatible releases are expected to work.
+torch>=2.2
+numpy>=1.26
+pandas>=2.0
+scikit-learn>=1.3
+scipy>=1.11
+matplotlib>=3.7
