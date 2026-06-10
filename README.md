@@ -8,11 +8,11 @@ A deep-learning study testing whether per-analyst embeddings can extract signal 
 
 ## Team
 
-| Name | Email | |
-|---|---|---|
-| Rayyan Hussain | rhussai9@depaul.edu | Modeling |
-| Akshaj Sriachutananda | asriachu@depaul.edu | Data extraction |
-| Damian Moreno | dmoren37@depaul.edu | Experiments & writing |
+| Name | Email |
+|---|---|
+| Rayyan Hussain | rhussai9@depaul.edu |
+| Akshaj Sriachutananda | asriachu@depaul.edu |
+| Damian Moreno | dmoren37@depaul.edu |
 
 The three of us shared the work across data extraction, modeling, and experiments/writing, with weekly check-ins.
 
