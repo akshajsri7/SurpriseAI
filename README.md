@@ -22,7 +22,7 @@ The three of us shared the work across data extraction, modeling, and experiment
 
 ## Concepts in plain terms
 
-This project sits at the intersection of finance and machine learning, so here is the vocabulary you need — no background in either assumed.
+This project spans finance and machine learning. The glossary below defines the key terms from both fields.
 
 **The finance side**
 
